@@ -1,19 +1,25 @@
 <template>
     <section>
         <mu-content-block style="display:flex;">
-            <mu-select-field :value="activeUI" @change="handleTabChange" autoWidth>
-                <mu-menu-item title="Muse-UI" value="Muse-UI">
-                </mu-menu-item>
-                <mu-menu-item title="Mint-UI" value="Mint-UI">
-                </mu-menu-item>
-                <mu-menu-item title="iView-UI" value="iView-UI">
-                </mu-menu-item>
-                <mu-menu-item title="Element-UI" value="Element-UI">
-                </mu-menu-item>
-                <mu-menu-item title="通用" value="Common">
-                </mu-menu-item>
-            </mu-select-field>
-            <mu-sub-header style="white-space:nowrap;">- 组件</mu-sub-header>
+            <mu-tabs :value="activeUI" @change="changeUITab">
+              <mu-tab title="布局" value="布局"></mu-tab>
+              <mu-tab title="数据" value="数据"></mu-tab>
+              <mu-tab title="表单" value="表单"></mu-tab>
+              <mu-tab title="其他" value="其他"></mu-tab>
+            </mu-tabs>
+            <!--<mu-select-field :value="activeUI" @change="handleTabChange" autoWidth>-->
+                <!--<mu-menu-item title="Muse-UI" value="Muse-UI">-->
+                <!--</mu-menu-item>-->
+                <!--<mu-menu-item title="Mint-UI" value="Mint-UI">-->
+                <!--</mu-menu-item>-->
+                <!--<mu-menu-item title="iView-UI" value="iView-UI">-->
+                <!--</mu-menu-item>-->
+                <!--<mu-menu-item title="Element-UI" value="Element-UI">-->
+                <!--</mu-menu-item>-->
+                <!--<mu-menu-item title="通用" value="Common">-->
+                <!--</mu-menu-item>-->
+            <!--</mu-select-field>-->
+            <!--<mu-sub-header style="white-space:nowrap;">- 组件</mu-sub-header>-->
         </mu-content-block>
         <div v-if="activeUI === 'Muse-UI'">
             <ul class="components-list">
@@ -115,10 +121,10 @@
                 <li draggable="true" @dragstart="dragStart" data-name="Card">
                     <card />
                 </li>
-                <!--                 
+                <!--
                 <li draggable="true" @dragstart="dragStart" data-name="Back Top">
                     <backTop/>
-                </li> 
+                </li>
                 -->
             </ul>
         </div>
@@ -217,10 +223,10 @@
         </div>
         <div v-if="activeUI === 'Element-UI'">
             <ul class="components-list">
-                <!--                 
+                <!--
                 <li draggable="true" @dragstart="dragStart" data-name="Header">
                     <mt-header fixed title="Header"></mt-header>
-                </li> 
+                </li>
                 -->
             </ul>
         </div>
@@ -249,6 +255,8 @@
 import museUiList from './list/muse-ui'
 import mintUiList from './list/mint-ui'
 import iViewUiList from './list/iview-ui'
+// import MuTabs from "muse-ui/src/tabs/tabs";
+// import MuTab from "muse-ui/src/tabs/tab";
 export default {
     name: 'components',
     data() {
@@ -280,6 +288,9 @@ export default {
                 ui: this.activeUI
             }
             e.dataTransfer.setData('info', JSON.stringify(info))
+        },
+        changeUITab(e){
+            this.activeUI = e;
         }
     },
     computed: {
@@ -295,9 +306,11 @@ export default {
         }
     },
     components: {
-        ...museUiList,
-        ...mintUiList,
-        ...iViewUiList
+      ...museUiList,
+      ...mintUiList,
+      ...iViewUiList,
+      // MuTab,
+      // MuTabs
     }
 }
 </script>

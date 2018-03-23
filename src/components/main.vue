@@ -23,13 +23,17 @@
                 </mu-tab>
                 <mu-tab title="组件树" value="组件树">
                 </mu-tab>
+                <mu-tab title="页面" value="页面">
+                </mu-tab>
               </mu-tabs>
 
               <span><a class="parent-component" v-if="parentComponent" @click="switchComponent">┡ {{parentComponent.info.name}}</a> {{current.info?' - '+current.info.name:''}}</span>
             </mu-sub-header>
             <attributes v-if="selectField.value==='属性'" class="attributes-content" />
             <component-tree v-if="selectField.value==='组件树'" class="component-tree" :components="$store.state.components.filter(c=>!c.parentId)" />
-            <div class="attributes-bottom" v-if="current.info">
+            <pages v-if="selectField.value==='页面'"></pages>
+
+            <div class="attributes-bottom" v-if="current.info && selectField.value!='页面'">
               <mu-flat-button label="UI文档" @click="openUiDocument" />
               <mu-flat-button label="操作" @click="oprate" />
             </div>
@@ -58,6 +62,7 @@ import attributes from './attributes'
 import components from './components'
 import preview from './preview'
 import componentTree from './componentTree.vue'
+import Pages from "./pages";
 export default {
     name: 'app',
     data() {
@@ -191,7 +196,8 @@ export default {
         }
     },
     components: {
-        components,
+      Pages,
+      components,
         preview,
         attributes,
         componentTree
