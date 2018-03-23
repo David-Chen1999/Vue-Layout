@@ -14,3 +14,15 @@ html::-webkit-scrollbar {
     display: inline-block;
     vertical-align: middle;
 }
+
+.row {
+  outline-style: dotted;
+  outline-color: #1b181b;
+  outline-width: 1px;
+}
+
+.col {
+  outline-style: dashed;
+  outline-color: #0C9A9A;
+  outline-width: 1px;
+}

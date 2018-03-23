@@ -98,6 +98,29 @@ export default {
             let preview = this.$refs.preview
             let x = e.clientX - left,
                 y = e.clientY - top + preview.scrollTop
+
+            //high-light target element
+            this.components.forEach(component => {
+              if(component.position){
+                let {
+                  offsetLeft,
+                  offsetTop,
+                  offsetRight,
+                  offsetBottom
+                } = component.position
+
+                let offset = 5
+                //不在当前元素位置内
+                if (x > offsetLeft && x < offsetRight && y > offsetTop && y < offsetBottom) {
+                    document.getElementById(component.info.id).setAttribute('data-component-active', 'true')
+                }else {
+                  document.getElementById(component.info.id).setAttribute('data-component-active', '')
+                }
+
+              }
+          })
+
+            //add placeholder
             this.components.filter(component => !component.parentId).forEach(component => {
                 let {
                     offsetLeft,
@@ -187,7 +210,7 @@ export default {
             //CODE视图的文字拖动也会触发此事件，这里屏蔽掉
             if (e.target.className.indexOf('sound-code') !== -1 || e.target.className.indexOf('hljs') !== -1)
                 return
-
+            debugger
             let isNest = e.target.className.indexOf('preview') === -1 && e.target.id !== 'placeholder'
             let info = JSON.parse(e.dataTransfer.getData('info'))
             info.id = guid()
@@ -208,6 +231,7 @@ export default {
                 this.popover.open = true
                 let selectSlot = new Promise((resolve, reject) => {
                     this.selectedSlot = value => {
+                        debugger
                         this.popover.open = false
                         resolve(value)
                     }
@@ -645,6 +669,7 @@ export default {
     position: relative;
     overflow: hidden;
     background: white;
+    padding: 5px;
 }
 
 .preview-area {
@@ -653,6 +678,8 @@ export default {
     height: inherit;
     z-index: 0;
     padding-bottom: 100px;
+    padding: 5px;
+
 }
 
 .preview-tip {
@@ -713,5 +740,7 @@ export default {
 .contextmenu>div {
     width: 100%;
 }
+
+
 </style>
 

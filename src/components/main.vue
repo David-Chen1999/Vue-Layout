@@ -7,7 +7,7 @@
             </div>
             <mu-icon-button icon="share" slot="right" @click="share.open=true" />
             <mu-icon-button icon="settings" slot="right" @click="setting.open=true" />
-            <mu-icon-button icon=":iconfont icon-github" slot="right" href="https://github.com/jaweii/Vue-Layout" /> 
+            <mu-icon-button icon=":iconfont icon-github" slot="right" href="https://github.com/jaweii/Vue-Layout" />
         </mu-appbar>
         <mu-row class="main-content">
             <mu-col class="attributes" :width="width.attr" :tablet="width.attr" :desktop="width.attr">
@@ -150,10 +150,10 @@ export default {
             let cssText
             if (val) {
                 cssText = `[data-component-active="true"] {
-                              box-shadow: inset 0px 0px 0px 1px pink!important;
+                              box-shadow: inset 0px 0px 0px 1px red!important;
                           }
                           [data-component-active]:hover {
-                              box-shadow: inset 0px 0px 0px 1px pink!important;
+                              box-shadow: inset 0px 0px 0px 1px yellow!important;
                           }
                           [data-component-active]:focus {
                               box-shadow: inset 0px 0px 0px 1px pink!important;
