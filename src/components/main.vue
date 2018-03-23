@@ -7,7 +7,7 @@
             </div>
             <mu-icon-button icon="share" slot="right" @click="share.open=true" />
             <mu-icon-button icon="settings" slot="right" @click="setting.open=true" />
-            <mu-icon-button icon=":iconfont icon-github" slot="right" href="https://github.com/jaweii/Vue-Layout" />
+            <mu-icon-button icon=":iconfont icon-github" slot="right" href="https://github.com/David-Chen1999/Vue-Layout" />
         </mu-appbar>
         <mu-row class="main-content">
           <mu-col class="components" :width="width.components" :tablet="width.components" :desktop="width.components">
@@ -18,12 +18,13 @@
             </mu-col>
           <mu-col class="attributes" :width="width.attr" :tablet="width.attr" :desktop="width.attr">
             <mu-sub-header class="header">
-              <mu-select-field class="select-field" autoWidth v-model="selectField.value">
-                <mu-menu-item title="属性" value="属性">
-                </mu-menu-item>
-                <mu-menu-item title="组件树" value="组件树">
-                </mu-menu-item>
-              </mu-select-field>
+              <mu-tabs ref="attrTabs" :value="selectField.value"  @change="changeAttrTab">
+                <mu-tab title="属性" value="属性">
+                </mu-tab>
+                <mu-tab title="组件树" value="组件树">
+                </mu-tab>
+              </mu-tabs>
+
               <span><a class="parent-component" v-if="parentComponent" @click="switchComponent">┡ {{parentComponent.info.name}}</a> {{current.info?' - '+current.info.name:''}}</span>
             </mu-sub-header>
             <attributes v-if="selectField.value==='属性'" class="attributes-content" />
@@ -120,6 +121,11 @@ export default {
             let el = document.getElementById(this.parentComponent.info.id)
             el.click()
         },
+
+        changeAttrTab(e){
+           this.selectField.value =  e ;
+        },
+
         oprate(e) {
             // let components = await this.$store.dispatch('delComponent', this.current.info.id)
             // this.$refs.preview.fresh()
